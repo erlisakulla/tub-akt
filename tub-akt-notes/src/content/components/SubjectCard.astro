@@ -1,0 +1,114 @@
+---
+// src/components/SubjectCard.astro
+import { Icon as StarlightIcon } from '@astrojs/starlight/components';
+import * as LucideIcons from 'lucide-astro';
+
+interface Props {
+  title: string;
+  icon?: string;   // Can be 'pencil' (Starlight) or 'Speaker' (Lucide)
+  href?: string;   // Where the card leads
+  image?: string;  // Optional: URL for an image instead of an icon
+}
+
+const { title, icon, href, image } = Astro.props;
+
+// Logic to find the Lucide icon: 
+// We check if the name exists in the Lucide library (handling PascalCase)
+const iconName = icon ? icon.charAt(0).toUpperCase() + icon.slice(1) : '';
+const LucideIcon = (LucideIcons as any)[iconName] || (icon ? (LucideIcons as any)[icon] : undefined);
+
+// If it's not Lucide, we assume it's a Starlight built-in icon
+const isStarlightIcon = icon && !LucideIcon;
+---
+
+<a href={href} class="subject-card-link">
+  <article class="subject-card">
+    <div class="header">
+      {image && <img src={image} class="card-image" alt={title} />}
+      
+      {!image && LucideIcon && (
+        <LucideIcon size={28} class="icon" strokeWidth={1.5} />
+      )}
+      
+      {!image && isStarlightIcon && (
+        <StarlightIcon name={icon as any} size="1.75rem" class="icon" />
+      )}
+      
+      <h3>{title}</h3>
+    </div>
+    
+    <div class="description">
+      <slot /> </div>
+  </article>
+</a>
+
+<style>
+  .subject-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .subject-card {
+    padding: 1.5rem;
+    background-color: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.75rem;
+    height: 100%;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* Fun hover effect */
+  .subject-card:hover {
+    border-color: var(--sl-color-accent-high);
+    background-color: var(--sl-color-gray-6);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .icon {
+    color: var(--sl-color-accent-high);
+    flex-shrink: 0;
+  }
+
+  .card-image {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  h3 {
+    margin: 0 !important;
+    font-size: 1.35rem !important;
+    font-weight: 600 !important;
+    color: var(--sl-color-white) !important;
+  }
+
+  .description {
+    font-size: 0.9rem;
+    color: var(--sl-color-gray-3);
+    line-height: 1.6;
+  }
+
+  /* Forces any links inside the description to look like buttons */
+  :global(.description a) {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.2rem 0.8rem;
+    background: var(--sl-color-accent-low);
+    border: 1px solid var(--sl-color-accent);
+    border-radius: 2rem;
+    color: var(--sl-color-accent-high) !important;
+    text-decoration: none !important;
+    font-weight: 500;
+  }
+</style>

@@ -1,0 +1,218 @@
+---
+title: "I Fundamentals of Sound"
+description: "something"
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+import { Image } from 'astro:assets';
+
+## Fundamental Acoustic Quantities
+
+> **<abbr title="Schallwelle">Sound Wave</abbr>** - a longitudinal wave which propagates through a medium (a solid, liquid or gas) by the oscillation of molecules about their resting positions.
+
+> **<abbr title="Schallfeld">Sound Field</abbr>** - a region where sound waves exist and travel.
+
+A **sound field** can be defined using various dynamic variables which describe fluctuations around a static atmospheric baseline. Some of these variables are:
+
+* **<abbr title="Schalldichte">Acoustic Density</abbr> ($\rho$):** The total density is the static density plus the fluctuating acoustic density: 
+
+  $$
+  \rho_{ges} = \rho_0 + \rho_{\sim}
+  $$
+
+  Unit: $\text{kg}/\text{m}^3$
+
+* **<abbr title="Schalldruck">Sound Pressure</abbr> ($p$):** The total pressure is the static atmospheric pressure plus the sound pressure: 
+
+  $$
+  p_{ges} = p_0 + p
+  $$
+
+  Unit: $\text{Pa}$ or $\text{N}/\text{m}^2$
+
+<div align="center">
+  <figure style="width:400px">
+    <img src="/img/ea1-longitudinal-wave.png" alt="Sound wave"/>
+    <img src="/img/ea1-sound-pressure-local.png"/>
+    <img src="/img/ea1-sound-pressure-time.png"/>
+  </figure>
+  <figcaption style="font-size:14px">(a) Changes in pressure and density plotted against position along the path of a sound wave, at a fixed time. (b) Sound pressure and density plotted against time at a fixed location.</figcaption>
+</div>
+
+* **<abbr title="Schallschnelle">Particle Velocity</abbr> ($\mathbf{v}$):** The velocity (speed and direction) of the particle oscillating about its position in the medium is the time derivative of the <abbr title="Schallausschlag">particle displacement</abbr> $\xi$:
+
+  $$
+  \mathbf{v}(\mathbf{x},t) = \frac{\partial}{\partial t}\xi(\mathbf{x},t)
+  $$
+
+  Unit: $\text{m}/\text{s}$
+
+* **<abbr title="Adiabatische Zustandsgleichung">Adiabatic Equation of State</abbr>:** Describes the thermodynamic relationship between pressure and density changes in a sound wave: 
+
+  $$
+  \frac{p}{p_0} = \left(\frac{\rho_{\sim}}{\rho_0}\right)^{\kappa}
+  $$
+
+<Aside>
+  The change in sound pressure is proportional to the change in density raised to a certain power called the **<abbr title="Isentropenexponent">Adiabatic Index</abbr> ($\kappa$)**, which is a constant specific to the gas.
+
+  When a gas is compressed (change in density and pressure), it usually heats up. When these changes are slow, the heat can escape into the environment (isothermal process). However, sound waves vibrate so incredibly fast that the generated heat generated has no time to escape, therefore there is no heat exhange (adibatic process). This "trapped" heat increases the pressure even more.
+</Aside>
+
+## Impedance
+
+**Impedance** describes the resistance to an alternating flow of energy. It relates a driving force or pressure to the resulting velocity. High impedance means you have to push really hard (high pressure/force) to get just a little bit of movement (low velocity). Low impedance means a light push creates a lot of movement.
+
+{/* Describe in more detail each type of impedance */}
+
+* **<abbr title="Akustische Feldimpedanz / Schallkennimpedanz / Schallwellenwiderstand">Acoustic Field Impedance</abbr> ($Z_{\text{c}}$):** The "surface-related" view of impedance, defined as pressure over velocity: 
+
+  $$
+  Z_{\text{c}} = \frac{F/S}{v} = \frac{p}{v}
+  $$
+
+  Unit: $\text{Pa} \cdot \text{s} \cdot \text{m}^{-1}$ or $\text{N} \cdot \text{s} \cdot \text{m}^{-3}$
+
+* **<abbr title="Mechanische Impedanz">Mechanical Impedance</abbr> ($Z_{\text{m}}$):** The "force- / point-related" view, defined as force over velocity: 
+
+  $$
+  Z_{\text{m}} = \frac{F}{v}
+  $$
+
+  Unit: $\text{N} \cdot \text{s} \cdot \text{m}^{-1}$
+
+* **<abbr title="Kennimpedanz">Characteristic Impedance</abbr> ($Z_0$):** Represents the inherent resistance of the medium to the propagation of sound waves. For a _plane wave_, this simplifies to the product of density and the speed of sound: 
+
+  $$
+  Z_0 = \rho c
+  $$
+
+{/* <Aside>
+  **Example:** .....
+</Aside> */}
+
+## Speed of Sound
+
+The **<abbr title="Schallgeschwindigkeit">speed of sound</abbr> ($c$)** defines how fast sound waves travel through a medium. It is calculated using the adiabatic index ($\kappa$), the universal gas constant ($R$), temperature ($T$), and molar mass ($M_{mol}$): 
+
+$$
+c = \sqrt{\frac{\kappa RT}{M_{mol}}}
+$$
+
+Unit: $\text{m}/\text{s}$
+
+* **Practical Approximation:** In air, it can be approximated based on the temperature in Celsius ($\vartheta$): 
+
+  $$
+  c = 331.1 + 0.6 \cdot \vartheta
+  $$
+
+  The speed of sound in dry air at 20°C is approximately 343 m/s.
+
+## Energy, Intensity and Power
+
+* **<abbr title="Schallenergiedichte">Sound Energy Density</abbr> ($w$):** Represents the amount of acoustic energy ($E$) that is _temporarily stored_ within an infinitesimally small volume ($\text{d}S$) in a sound field for a sound wave passing with velocity $c$. It is the sum of potential energy (related to pressure) and kinetic energy (related to particle velocity):
+
+  $$
+  w = \frac{E}{c\text{d}t\text{d}S} = \frac{1}{2}\left\{ \frac{p^2}{\rho_0 c^2} + \rho_0 v^2 \right\}
+  $$
+
+  Unit: $\text{J}/\text{m}^3$ or $\text{Ws}/\text{m}^3$
+
+* **<abbr title="Schallintensität">Sound Intensity</abbr> ($I$):** Represents how much of the acoustic energy is _actively flowing_ through a surface element ($\text{d}S$) per time interval ($\text{d}t$). It is the product of pressure and particle velocity: 
+
+  $$
+  \mathbf{I} = p \cdot \mathbf{v}
+  $$
+
+  Knowing the field impedance $Z_{\text{c}}$, especially for a plane sound wave with $Z_0 = \rho c$, the sound intensity ($I$) can be determined from the sound pressure ($p$) through:
+
+  $$
+  \mathbf{I} = \frac{p^2}{Z_c}
+  $$
+
+  Relationship with energy density and speed of sound:
+
+  $$
+  I = \frac{P}{\text{d}S} = \frac{E}{\text{d}t\text{d}S} = w \cdot c
+  $$
+
+  Unit: $\text{W}/\text{m}^2$
+
+<Aside type="caution">
+  **Question:** What is the difference between $I$ and $\mathbf{I}$? When is one or the other used?
+</Aside>
+
+<div align="center">
+  <img src="/img/ea1-source-types.png"/>
+</div>
+
+Sound fields and distance attenuation:
+
+<Tabs>
+  <TabItem label="Point Source">
+    $$
+    I \sim \frac{1}{r^2}, \quad p \sim \frac{1}{r}
+    $$
+  </TabItem>
+  <TabItem label="Line Source">
+    $$
+    I \sim \frac{1}{r}, \quad p \sim \frac{1}{\sqrt{r}}
+    $$
+    </TabItem>
+  <TabItem label="Plane Source">
+    $$
+    I = \text{const.}, \quad p = \text{const.}
+    $$
+  </TabItem>
+</Tabs>
+
+{/* <Aside type="note">
+  **Example 1:** A loudspeaker with a sound power of 1 W radiating sound uniformly in all directions (spherical radiation) would produce a sound intensity of approximately 0.08 W/m² at a distance of 2 m from the speaker, since the sound power is spread over the surface area of a sphere with radius 2 m: 
+
+  $$
+  I = \frac{P}{4\pi r^2} = \frac{1}{4\pi \cdot (2)^2} \approx 0.08 \text{ W/m}^2
+  $$
+
+  **Example 2:** The sound power of a typical human conversation is around 0.0001 W (100 mW). At a distance of 1 m, the sound intensity would be approximately 0.000008 W/m² (8 μW/m²), which is much lower than the sound intensity of a loudspeaker.
+</Aside> */}
+
+* **<abbr title="Schallleistung">Sound Power</abbr> ($P$):** The total power flowing through an _entire surface_ $S$:
+
+  $$
+  P = \int_S \mathbf{I} \text{d}S
+  $$
+
+  The power expended to move a point mass can be given by the applied force $F$ and the velocity $v$:
+
+  $$
+  P = F \cdot v
+  $$
+
+  The sound power can also be determined using sound intensity measurements at $N$ points on a surface $S$ surrounding the source, as specified in the DIN EN ISO 3745 (enveloping surface method):
+
+  $$
+  P = S \frac{1}{N} \sum_{n=1}^{N} I_n = S \frac{1}{N} \sum_{n=1}^{N} \frac{p_{\text{eff,n}}^2}{\rho_0 c}
+  $$
+
+  Unit: $\text{W}$
+
+## Level Calculation
+
+### Why use decibels?
+Using logarithmic levels maps well to human perception. This is rooted in **Weber's Law** ($\frac{\Delta R}{R} = const.$) and **Stevens's Power Law** ($E = k \cdot R^n$), which state that sensation relates logarithmically or via a power law to stimulus intensity. 
+* **Rule of Thumb:** A 10 dB increase represents a doubling of subjective loudness. The Just Noticeable Difference (JND) is about 1 dB.
+
+### Formulas
+* **Relative Levels:** $L = 10 \lg \frac{X_1}{X_2} dB_{rel}$.
+* **Absolute Levels for Power Quantities** (e.g., intensity, sound power): $L_X = 10 \lg \frac{X}{X_0} dB$.
+* **Absolute Levels for Field Quantities** (e.g., pressure, voltage): $L_x = 20 \lg \frac{x}{x_0} dB$.
+
+### Important Acoustic Reference Values ($X_0$)
+* **Sound Power Level:** $P_0 = 10^{-12}$ W.
+* **Sound Intensity Level:** $I_0 = 10^{-12}$ W/m$^2$.
+* **Sound Pressure Level:** $p_0 = 2 \cdot 10^{-5}$ Pa.
+
+{/* ### Sources
+
+[^1]: From [Fundamentals of Acoustics](https://www.wiley.com/en-us/Fundamentals+of+Acoustics%2C+4th+Edition-p-9780471847898) by Kinsler, Frey, Coppens, and Sanders. */}
